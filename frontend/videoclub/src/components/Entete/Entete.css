@@ -1,36 +1,67 @@
 /* Entete.css */
 
 .entete {
-    background-color: #007bff;
-    color: #fff;
-    padding: 10px 0;
+  color: var(--couleur-texte);
+}
+
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: var(--largeur-max-conteneur);
+  margin: 0 auto;
+}
+
+
+nav {
+  display: flex;
+}
+
+nav a {
+  color: var(--couleur-texte);
+  margin-left: var(--espace-moyen);
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+.entete__user {
+  display: flex;
+  align-items: center;
+}
+
+.entete__form input {
+  padding: var(--espace-petit);
+  margin-right: var(--espace-petit);
+  border-radius: var(--bordure-radius-petit);
+  border: 1px solid var(--couleur-clair);
+}
+
+.entete__form button {
+  padding: var(--espace-petit) var(--espace-moyen);
+  color: var(--couleur-texte);
+  background-color: var(--couleur-secondaire);
+  border: none;
+  border-radius: var(--bordure-radius-moyen);
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.entete__form button:hover {
+  background-color: var(--couleur-tertiaire);
+}
+
+.logo {
+  width: 150px;
+  /* animation: colorChange 5s infinite alternate; */
+}
+
+/* @keyframes colorChange {
+  0% {
+    color: red;
   }
-  
-  .wrapper {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
+  100% {
+    color: greenyellow;
   }
-  
-  .entete h1 {
-    font-size: 24px;
-    margin: 0;
-  }
-  
-  nav {
-    display: flex;
-  }
-  
-  nav a {
-    color: #fff;
-    text-decoration: none;
-    margin-left: 20px;
-  }
-  
-  nav a:hover {
-    text-decoration: underline;
-  }
-  
+} */

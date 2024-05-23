@@ -3,15 +3,12 @@ import { useParams } from "react-router-dom";
 import { AppContext } from '../App/App';
 import Vote from '../Vote/Vote';
 import Commentaires from '../Commentaires/Commentaires';
-
 import "./Film.css";
-
 
 export function Film(props) {
   const { id } = useParams();
   const [film, setFilm] = useState(null);
   const context = useContext(AppContext);
-
   const urlFilm = `https://api-film-1.onrender.com/films/${id}`;
 
   useEffect(() => {
@@ -23,6 +20,9 @@ export function Film(props) {
         return response.json();
       })
       .then((data) => {
+        if (!data.commentaire) {
+          data.commentaire = [];
+        }
         setFilm(data);
       })
       .catch((error) => {
@@ -91,13 +91,17 @@ export function Film(props) {
 
   return (
     <div className="film">
-      <h1>{film.titre}</h1>
-      <img src={`/img/${film.titreVignette}`} alt={film.titre} />
-      <p>Réalisateur: {film.realisateur}</p>
-      <p>Année: {film.annee}</p>
-      <p>Description: {film.description}</p>
-      <Vote film={film} onVote={soumettreNote} />
-      {blockAjoutCommentaire}
+      <div className="film-header">
+        <img src={`/img/${film.titreVignette}`} alt={film.titre} className="film-image" />
+        <div className="film-details">
+          <h1>{film.titre}</h1>
+          <p>Réalisateur: {film.realisateur}</p>
+          <p>Année: {film.annee}</p>
+          <p>Description: {film.description}</p>
+          <Vote film={film} onVote={soumettreNote} />
+          {blockAjoutCommentaire}
+        </div>
+      </div>
       <Commentaires commentaires={film.commentaire} />
     </div>
   );

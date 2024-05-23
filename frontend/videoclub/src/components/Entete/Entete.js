@@ -21,7 +21,7 @@ function Entete(props) {
       <div className="wrapper">
         <div className="entete">
           <NavLink to="/">
-            <h1>VidéoClub</h1>
+            <img className="logo" src="/img/cineDev.svg"/>
           </NavLink>
           <nav>
             {context.estLog && <NavLink to='admin'>Admin</NavLink>}

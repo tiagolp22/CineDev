@@ -1,0 +1,23 @@
+.accueil {
+  text-align: center;
+}
+
+.accueil__hero {
+  padding: var(--espace-grand);
+  border-radius: var(--bordure-radius-grand);
+  margin-bottom: var(--espace-grand);
+}
+
+.accueil__image {
+  max-width: 100%;
+  height: auto;
+}
+
+.accueil__content {
+  
+  padding: var(--espace-moyen);
+  border-radius: var(--bordure-radius-moyen);
+  box-shadow: var(--ombre-legere);
+  color: var(--couleur-texte);
+  font-size: var(--taille-texte-moyen);
+}

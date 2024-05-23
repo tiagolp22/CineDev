@@ -54,12 +54,8 @@ function ListeFilms() {
     exit: { opacity: 0, x: -25, transition },
   };
 
-  
   return (
     <main>
-      <section className="hero-banner">
-        <h1>Catalogue des Films</h1>
-      </section>
       <motion.div
         key="filtres"
         initial="hidden"
@@ -80,7 +76,56 @@ function ListeFilms() {
           {tuilesFilm}
         </motion.div>
       ) : (
-        <p>Chargement...</p>
+        <div className="container">
+          <div className="col-sm-6 col-md-3">
+            <div className="movie--isloading">
+              <div className="loading-image"></div>
+              <div className="loading-content">
+                <div className="loading-text-container">
+                  <div className="loading-main-text"></div>
+                  <div className="loading-sub-text"></div>
+                </div>
+                <div className="loading-btn"></div>
+              </div>
+            </div>
+          </div>
+          <div className="col-sm-6 col-md-3">
+            <div className="movie--isloading">
+              <div className="loading-image"></div>
+              <div className="loading-content">
+                <div className="loading-text-container">
+                  <div className="loading-main-text"></div>
+                  <div className="loading-sub-text"></div>
+                </div>
+                <div className="loading-btn"></div>
+              </div>
+            </div>
+          </div>
+          <div className="col-sm-6 col-md-3">
+            <div className="movie--isloading">
+              <div className="loading-image"></div>
+              <div className="loading-content">
+                <div className="loading-text-container">
+                  <div className="loading-main-text"></div>
+                  <div className="loading-sub-text"></div>
+                </div>
+                <div className="loading-btn"></div>
+              </div>
+            </div>
+          </div>
+          <div className="col-sm-6 col-md-3">
+            <div className="movie--isloading">
+              <div className="loading-image"></div>
+              <div className="loading-content">
+                <div className="loading-text-container">
+                  <div className="loading-main-text"></div>
+                  <div className="loading-sub-text"></div>
+                </div>
+                <div className="loading-btn"></div>
+              </div>
+            </div>
+          </div>
+        </div>
       )}
     </main>
   );
