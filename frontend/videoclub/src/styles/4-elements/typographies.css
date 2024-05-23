@@ -1,0 +1,40 @@
+/* elements/typography.css */
+
+/* Styles généraux de typographie */
+body {
+    font-family: var(--police-principale);
+    color: var(--couleur-texte);
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--police-secondaire);
+    color: var(--couleur-texte);
+    margin-bottom: var(--espace-moyen);
+  }
+  
+  h1 {
+    font-size: var(--taille-texte-tres-grand);
+  }
+  
+  h2 {
+    font-size: var(--taille-texte-grand);
+  }
+  
+  h3 {
+    font-size: var(--taille-texte-moyen);
+  }
+  
+  p {
+    font-size: var(--taille-texte-moyen);
+    margin-bottom: var(--espace-moyen);
+  }
+  
+  a {
+    color: var(--couleur-principale);
+    text-decoration: none;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
+  

@@ -1,0 +1,38 @@
+body {
+    font-family: var(--police-principale);
+    background-color: var(--couleur-fond);
+    color: var(--couleur-texte);
+    margin: 0;
+    padding: 0;
+  }
+  
+  h1, h2, h3 {
+    font-family: var(--police-secondaire);
+    color: var(--couleur-texte);
+  }
+  
+  h1 {
+    font-size: var(--taille-texte-tres-grand);
+  }
+  
+  h2 {
+    font-size: var(--taille-texte-grand);
+  }
+  
+  h3 {
+    font-size: var(--taille-texte-moyen);
+  }
+  
+  .container {
+    max-width: var(--largeur-max-conteneur);
+    margin: 0 auto;
+    padding: var(--espace-moyen);
+  }
+  
+  .card {
+    background-color: var(--couleur-secondaire);
+    padding: var(--espace-moyen);
+    border-radius: var(--bordure-radius-moyen);
+    box-shadow: var(--ombre-legere);
+  }
+  

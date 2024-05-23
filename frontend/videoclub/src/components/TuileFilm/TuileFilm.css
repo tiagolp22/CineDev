@@ -1,0 +1,30 @@
+/* components/tuileFilm.css */
+
+.tuile-film {
+    border-radius: var(--bordure-radius-moyen);
+    padding: var(--espace-petit);
+    background-color: var(--couleur-blanc);
+    box-shadow: var(--ombre-legere);
+    transition: transform 0.4s ease-in-out;
+  }
+  
+  .tuile-film:hover {
+    transform: translateY(-5px);
+  }
+  
+  .tuile-film img {
+    width: 100%;
+    height: auto;
+    border-radius: var(--bordure-radius-petit);
+  }
+  
+  .tuile-film h2 {
+    font-size: var(--taille-texte-grand);
+    margin-bottom: var(--espace-petit);
+  }
+  
+  .tuile-film p {
+    font-size: var(--taille-texte-moyen);
+    margin-bottom: var(--espace-petit);
+  }
+  

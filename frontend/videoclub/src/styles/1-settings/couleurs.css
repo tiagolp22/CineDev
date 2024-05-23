@@ -1,0 +1,11 @@
+/* Couleurs */
+:root {
+    --couleur-principale: #090088;
+    --couleur-secondaire: #02006c;
+    --couleur-tertiaire: #010057;
+    --couleur-texte: #fafafa;
+    --couleur-fond: #022859;
+    --couleur-clair:#0460D9;
+    --couleur-clair-2:#0597F2;
+    --couleur-fonce:#0d0d0d;
+  }

@@ -1,0 +1,30 @@
+/* elements/buttons.css */
+
+/* Styles de bouton génériques */
+.btn {
+    display: inline-block;
+    padding: var(--espace-petit) var(--espace-moyen);
+    font-size: var(--taille-texte-moyen);
+    font-family: var(--police-principale);
+    color: #fff;
+    background-color: var(--couleur-principale);
+    border: none;
+    border-radius: var(--bordure-radius-moyen);
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .btn:hover {
+    background-color: var(--couleur-secondaire);
+  }
+  
+  .btn--secondaire {
+    background-color: var(--couleur-secondaire);
+  }
+  
+  .btn--secondaire:hover {
+    background-color: var(--couleur-tertiaire);
+  }
+  

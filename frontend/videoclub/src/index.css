@@ -1,0 +1,33 @@
+/* SETTINS */
+
+@import url(./styles/1-settings/variables.css);
+@import url(./styles/1-settings/couleurs.css);
+
+/* TOOLS */
+
+/* @import url(./styles/2-tools/); */
+
+/* GENERIC */
+
+@import url(./styles/3-generic/base.css);
+@import url(./styles/3-generic/reset.css);
+
+/* ELEMENTS */
+
+@import url(./styles/4-elements/buttons.css);
+@import url(./styles/4-elements/footer.css);
+@import url(./styles/4-elements/typographies.css);
+
+/* OBJECTS */
+
+@import url(./styles/5-objects/wrapper.css);
+
+/* COMPONENTS */
+
+/* @import url(./styles/6-components/); */
+
+/* UTILITIES */
+
+/* @import url(./styles/7-utilities/); */
+
+

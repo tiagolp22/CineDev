@@ -1,0 +1,56 @@
+/* components/listeFilms.css */
+
+/* Hero banner */
+.hero-banner {
+  background-color: var(--couleur-principale);
+  color: var(--couleur-blanc);
+  text-align: center;
+  padding: var(--espace-tres-grand) var(--espace-moyen);
+}
+
+.hero-banner h1 {
+  font-size: var(--taille-texte-tres-grand);
+}
+
+/* Conteneur de films */
+.films-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-gap: var(--espace-moyen);
+  padding: var(--espace-moyen);
+}
+
+/* Carte de film */
+.film-card {
+  border-radius: var(--bordure-radius-moyen);
+  padding: var(--espace-petit);
+  background-color: var(--couleur-blanc);
+  box-shadow: var(--ombre-legere);
+  transition: transform 0.4s ease-in-out;
+}
+
+.film-card:hover {
+  transform: translateY(-5px);
+}
+
+.film-card h3 {
+  font-size: var(--taille-texte-grand);
+  margin-bottom: var(--espace-petit);
+}
+
+.film-card p {
+  font-size: var(--taille-texte-moyen);
+  margin-bottom: var(--espace-petit);
+}
+
+.film-card img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--bordure-radius-petit);
+}
+
+/* Lien de la carte de film */
+.film-card-link {
+  text-decoration: none;
+  color: inherit;
+}

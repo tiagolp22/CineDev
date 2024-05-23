@@ -1,0 +1,36 @@
+/* Entete.css */
+
+.entete {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 0;
+  }
+  
+  .wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  
+  .entete h1 {
+    font-size: 24px;
+    margin: 0;
+  }
+  
+  nav {
+    display: flex;
+  }
+  
+  nav a {
+    color: #fff;
+    text-decoration: none;
+    margin-left: 20px;
+  }
+  
+  nav a:hover {
+    text-decoration: underline;
+  }
+  
