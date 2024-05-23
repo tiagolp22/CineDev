@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { AppContext } from '../App/App';
-import Vote from '../Vote/Vote';
 import Commentaires from '../Commentaires/Commentaires';
+import StarRating from '../StarRating/StarRating';
 import "./Film.css";
 
 export function Film(props) {
@@ -36,7 +36,7 @@ export function Film(props) {
 
   const soumettreNote = async (note) => {
     const updatedNotes = film.notes ? [...film.notes, note] : [note];
-    
+
     const oOptions = {
       method: "PUT",
       headers: {
@@ -89,6 +89,10 @@ export function Film(props) {
     );
   }
 
+  const moyenneNotes = film.notes && film.notes.length
+    ? film.notes.reduce((acc, note) => acc + note, 0) / film.notes.length
+    : 0;
+
   return (
     <div className="film">
       <div className="film-header">
@@ -98,7 +102,7 @@ export function Film(props) {
           <p>Réalisateur: {film.realisateur}</p>
           <p>Année: {film.annee}</p>
           <p>Description: {film.description}</p>
-          <Vote film={film} onVote={soumettreNote} />
+          <StarRating rating={moyenneNotes} onRate={soumettreNote} />
           {blockAjoutCommentaire}
         </div>
       </div>

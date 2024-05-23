@@ -1,0 +1,27 @@
+/* StarRating.css */
+.star-rating {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.rating-value {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.stars {
+  display: flex;
+}
+
+.star {
+  font-size: 30px;
+  color: var(--couleur-principale);
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.star.filled {
+  color: var(--couleur-clair);
+}
