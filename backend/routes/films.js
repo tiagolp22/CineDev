@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const db = require("../config/db.js");
 const { check, validationResult } = require("express-validator");
+const auth = require("../middlewares/auth.js");
 
 /**
  * Cette route permet de récupérer la liste des films
@@ -79,6 +80,7 @@ router.get("/:id", [check("id").escape().trim().notEmpty()], async (req, res) =>
  */
 router.post(
     "/",
+    auth,
     [
         check("titre").escape().trim().notEmpty().isString(),
         check("genres").escape().trim().exists().isArray(),
@@ -111,6 +113,7 @@ router.post(
  */
 router.put(
     "/:id",
+    auth,
     [
         check("id").escape().trim().notEmpty().isString(),
         check("titre").escape().trim().optional(true).notEmpty().isString(),
@@ -156,7 +159,7 @@ router.put(
  * Cette route permet de supprimer un film
  * @route DELETE /films/{id}
  */
-router.delete("/:id", [check("id").escape().trim().notEmpty().isString()], async (req, res) => {
+router.delete("/:id", auth, [check("id").escape().trim().notEmpty().isString()], async (req, res) => {
     try {
         const validation = validationResult(req);
         if (!validation.isEmpty()) {

@@ -2,7 +2,9 @@ const express = require("express");
 const router = express.Router();
 const db = require("../config/db.js");
 const bcrypt = require("bcrypt");
+const jwt = require ("jsonwebtoken");
 const { check, validationResult } = require("express-validator");
+
 
 // /**
 //  * @route GET /utilisateurs
@@ -140,8 +142,19 @@ router.post(
                 const resultatConnexion = await bcrypt.compare(motDePasse, utilisateur.mdp);
 
                 if (resultatConnexion) {
-                    //Générer le token JWT // Partie 3 du cours
-                    res.json(utilisateur);
+                    
+                    const donneesJeton = {
+                        id:utilisateur.id,
+                        courriel: utilisateur.courriel,
+                    };
+                    const options = {
+                        expiresIn:"1d",
+                    };
+
+                    const jeton = jwt.sign(donneesJeton, process.env.JWT_SECRET, options);
+
+                    res.json(jeton);
+
                 } else {
                     res.statusCode = 400;
                     res.json({ message: "Mot de passe incorrect" });
