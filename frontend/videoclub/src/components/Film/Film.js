@@ -82,9 +82,9 @@ export function Film(props) {
 
   if (context.estLog) {
     blockAjoutCommentaire = (
-      <form onSubmit={soumettreCommentaire}>
-        <textarea name="commentaire" placeholder="Ajouter votre commentaire" />
-        <button>Soumettre</button>
+      <form onSubmit={soumettreCommentaire} className="comment-form">
+        <textarea name="commentaire" placeholder="Ajouter votre commentaire" className="comment-textarea" />
+        <button className="comment-button">Soumettre</button>
       </form>
     );
   }

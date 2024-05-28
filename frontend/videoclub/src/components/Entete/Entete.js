@@ -2,26 +2,16 @@ import { NavLink } from "react-router-dom";
 import "./Entete.css";
 import { AppContext } from "../App/App";
 import { useContext } from "react";
-//import { useRef } from "react";
-
 
 function Entete(props) {
-
-  //console.log(props);
-  //const elUsager = useRef();
   const context = useContext(AppContext);
-
-  // function login(e){
-  //   e.preventDefault();
-  //   console.log(elUsager.current.value);
-  // }
 
   return (
     <header>
       <div className="wrapper">
         <div className="entete">
           <NavLink to="/">
-            <img className="logo" src="/img/cineDev.svg"/>
+            <img className="logo" src="/img/cineDev2.gif" alt="Logo"/>
           </NavLink>
           <nav>
             {context.estLog && <NavLink to='admin'>Admin</NavLink>}
@@ -30,13 +20,13 @@ function Entete(props) {
         </div>
 
         {context.estLog ? (
-          <div>
+          <div className="entete__user">
             <span>{context.nom}</span>
             <button onClick={props.handleLogout}>Logout</button>
           </div>
         ) : (
-          <form onSubmit={props.handleLogin}>
-            <input type="text" name="usager" placeholder="Usager"></input>
+          <form className="entete__form" onSubmit={props.handleLogin}>
+            <input type="text" name="usager" placeholder="Usager" />
             <button>Login</button>
           </form>
         )}

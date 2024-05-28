@@ -1,4 +1,3 @@
-/* Film.css */
 .film {
   display: flex;
   flex-direction: column;
@@ -13,7 +12,6 @@
   width: 100%;
   margin-bottom: 20px;
   padding: 20px;
-  background-color: var(--couleur-secondaire);
   border-radius: var(--bordure-radius-moyen);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
@@ -35,11 +33,14 @@ form {
 
 textarea {
   width: 100%;
-  height: 100px;
+  height: 150px;
+  padding: 15px;
   margin-bottom: 10px;
-  padding: var(--espace-petit);
-  border-radius: var(--bordure-radius-petit);
+  font-size: 16px;
   border: 1px solid var(--couleur-clair);
+  border-radius: var(--bordure-radius-moyen);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  resize: vertical;
 }
 
 button {
@@ -55,3 +56,4 @@ button {
 button:hover {
   background-color: var(--couleur-secondaire);
 }
+

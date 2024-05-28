@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./Filtres.css";
 
 function Filtre({ filtre, urlListeFilm }) {
+  console.log(filtre);
   const [filtreActive, setFiltreActive] = useState(null);
 
   const activerFiltre = (orderBy, orderDirection) => {

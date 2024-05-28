@@ -3,7 +3,7 @@
 }
 
 .accueil__hero {
-  padding: var(--espace-grand);
+  /* padding: var(--espace-grand); */
   border-radius: var(--bordure-radius-grand);
   margin-bottom: var(--espace-grand);
 }

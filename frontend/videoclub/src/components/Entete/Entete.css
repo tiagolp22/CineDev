@@ -1,5 +1,3 @@
-/* Entete.css */
-
 .entete {
   color: var(--couleur-texte);
 }
@@ -41,7 +39,7 @@ nav a:hover {
 .entete__form button {
   padding: var(--espace-petit) var(--espace-moyen);
   color: var(--couleur-texte);
-  background-color: var(--couleur-secondaire);
+  background-color: #F5C518;
   border: none;
   border-radius: var(--bordure-radius-moyen);
   cursor: pointer;
@@ -49,7 +47,7 @@ nav a:hover {
 }
 
 .entete__form button:hover {
-  background-color: var(--couleur-tertiaire);
+  background-color:#bb9614;
 }
 
 .logo {
