@@ -2,51 +2,34 @@ import React, { useState } from "react";
 import "./Filtres.css";
 
 function Filtre({ filtre, urlListeFilm }) {
-  const [filtreActive, setFiltreActive] = useState(null);
+  const [filtreActif, setFiltreActif] = useState("");
 
   const activerFiltre = (orderBy, orderDirection) => {
+    const filtreString = `${orderBy}-${orderDirection}`;
     filtre(`${urlListeFilm}?orderBy=${orderBy}&orderDirection=${orderDirection}`);
-    setFiltreActive(orderBy);
+    setFiltreActif(filtreString);
   };
+
+  const filtres = [
+    { label: "Trier par titre (A-Z)", orderBy: "titre", orderDirection: "asc" },
+    { label: "Trier par titre (Z-A)", orderBy: "titre", orderDirection: "desc" },
+    { label: "Trier par réalisateur (A-Z)", orderBy: "realisation", orderDirection: "asc" },
+    { label: "Trier par réalisateur (Z-A)", orderBy: "realisation", orderDirection: "desc" },
+    { label: "Par année (du plus récent)", orderBy: "annee", orderDirection: "desc" },
+    { label: "Par année (du plus ancien)", orderBy: "annee", orderDirection: "asc" },
+  ];
 
   return (
     <ul className="filtre">
-      <li
-        className={filtreActive === "titre" && "active"}
-        onClick={() => activerFiltre("titre", "asc")}
-      >
-        Titre alphabétique (A-Z)
-      </li>
-      <li
-        className={filtreActive === "titre" && "active"}
-        onClick={() => activerFiltre("titre", "desc")}
-      >
-        Titre alphabétique (Z-A)
-      </li>
-      <li
-        className={filtreActive === "realisation" && "active"}
-        onClick={() => activerFiltre("realisation", "asc")}
-      >
-        Réalisateur alphabétique (A-Z)
-      </li>
-      <li
-        className={filtreActive === "realisation" && "active"}
-        onClick={() => activerFiltre("realisation", "desc")}
-      >
-        Réalisateur alphabétique (Z-A)
-      </li>
-      <li
-        className={filtreActive === "annee" && "active"}
-        onClick={() => activerFiltre("annee", "desc")}
-      >
-        Par année (du plus récent)
-      </li>
-      <li
-        className={filtreActive === "annee" && "active"}
-        onClick={() => activerFiltre("annee", "asc")}
-      >
-        Par année (du plus ancien)
-      </li>
+      {filtres.map(({ label, orderBy, orderDirection }) => (
+        <li
+          key={`${orderBy}-${orderDirection}`}
+          className={filtreActif === `${orderBy}-${orderDirection}` ? "active" : ""}
+          onClick={() => activerFiltre(orderBy, orderDirection)}
+        >
+          {label}
+        </li>
+      ))}
     </ul>
   );
 }
