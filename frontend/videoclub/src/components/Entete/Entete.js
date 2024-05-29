@@ -7,6 +7,7 @@ function Entete(props) {
   const context = useContext(AppContext);
 
   return (
+    //TODO Ajouter l'etat de connexion
     <header>
       <div className="wrapper">
         <div className="entete">
@@ -14,19 +15,20 @@ function Entete(props) {
             <img className="logo" src="/img/cineDev2.gif" alt="Logo"/>
           </NavLink>
           <nav>
-            {context.estLog && <NavLink to='admin'>Admin</NavLink>}
+            {context.isLogged && <NavLink to='admin'>Admin</NavLink>}
             <NavLink to="films">Liste des films</NavLink>
           </nav>
         </div>
 
-        {context.estLog ? (
+        {context.isLogged ? (
           <div className="entete__user">
             <span>{context.nom}</span>
             <button onClick={props.handleLogout}>Logout</button>
           </div>
         ) : (
           <form className="entete__form" onSubmit={props.handleLogin}>
-            <input type="text" name="usager" placeholder="Usager" />
+            <input type="text" name="courriel" placeholder="Usager" />
+            <input type="password" name="mdp" placeholder="Mot de passe" />
             <button>Login</button>
           </form>
         )}

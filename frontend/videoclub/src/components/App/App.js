@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { AnimatePresence } from "framer-motion";
 import "./App.css";
+import { jwtDecode } from "jwt-decode";
 import {
   BrowserRouter as Router,
   Routes,
@@ -18,25 +19,85 @@ import Admin from "../Admin/Admin";
 export const AppContext = React.createContext();
 
 function App() {
+
+  let appState = "DEV";// PROD
+  
+  let apiBaseURL = "https://api-film-1.onrender.com/";
+
+  if(appState === "DEV"){
+    apiBaseURL = "http://localhost:5501/";
+  }
+
   const location = useLocation();
 
-  const [usager, setUsager] = useState({ estLog: false, nom: "" });
+  const [usager, setUsager] = useState({ isLogged: false, usager: {} });
+
+  useEffect(()=>{
+    const estValide = jetonValide();
+    
+    const userData={
+      isLogged: estValide,
+      usager: {},
+    }
+
+    setUsager(userData);
+  }, [])
 
   // const [estLog, setEstLog] = useState(false);
 
-  function login(e) {
+  async function login(e) {
     e.preventDefault();
-    //console.log('login');
-    let usager = e.target.usager.value;
+    const form = e.target;
 
-    if (usager === "admin") {
-      setUsager((prevUsager) => ({ ...prevUsager, estLog: true, nom: usager }));
-      e.target.reset();
+    const body = {
+      courriel: form.courriel.value,
+      mdp:form.mdp.value,
+    }
+
+    const data = {
+      method: "POST",
+      headers: {
+        "Content-Type":"application/json"
+      },
+      body:JSON.stringify(body)
+    }
+
+    const reponse = await fetch(`${apiBaseURL}api/utilisateurs/connexion`, data);
+    const token = await reponse.json();
+
+    if (reponse.status === 200) {
+      localStorage.setItem("api-token", token);
+      const userData={
+        isLogged: true,
+        usager: {},
+      }
+  
+      setUsager(userData);
+    } else {
+      localStorage.removeItem("api-token", token);
+    }
+  }
+
+  function jetonValide(){
+    try {const token = localStorage.getItem("api-token");
+    const decode = jwtDecode(token);
+
+    if(token && Date.now()<decode.exp * 1000){
+      return true;
+    }else{
+      localStorage.removeItem("api-token");
+      return false;
+    }
+      
+    } catch (error) {
+      localStorage.removeItem("api-token");
+      return false;
     }
   }
 
   function logout() {
-    setUsager({ estLog: false, nom: "" });
+    setUsager({ isLogged: false });
+    localStorage.removeItem("api-token");
   }
 
   return (
@@ -53,7 +114,7 @@ function App() {
 
             <Route
               path="/admin"
-              element={usager.estLog ? <Admin /> : <Navigate to="/" />}
+              element={usager.isLogged ? <Admin /> : <Navigate to="/" />}
             />
           </Routes>
         </AnimatePresence>
