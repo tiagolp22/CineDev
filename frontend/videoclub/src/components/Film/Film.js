@@ -5,12 +5,15 @@ import Commentaires from '../Commentaires/Commentaires';
 import StarRating from '../StarRating/StarRating';
 import "./Film.css";
 import Animations from '../Animations/Animations';
+import Carrossel from '../Carrossel/Carrossel';
 
 export function Film(props) {
   const { id } = useParams();
   const [film, setFilm] = useState(null);
+  const [filmsAvecGenresSimilaires, setfilmsAvecGenresSimilaires] = useState([]);
   const context = useContext(AppContext);
   const urlFilm = `https://api-film-1.onrender.com/films/${id}`;
+  const urltoutFilms = "https://api-film-1.onrender.com/films";
 
   useEffect(() => {
     fetch(urlFilm)
@@ -20,17 +23,24 @@ export function Film(props) {
         }
         return response.json();
       })
-      .then((data) => {
-        if (!data.commentaire) {
-          data.commentaire = [];
-        }
-        console.log("Data retornada pelo fetch:", data);
-        setFilm(data);
+      .then((filmData) => {
+        const filmGenres = filmData.genres || [];
+        setFilm(filmData);
+        fetch(urltoutFilms)
+          .then((response) => response.json())
+          .then((filmes) => {
+            const filmFiltre = filmes.filter((f) => f.id !== id && Array.isArray(f.genres) && f.genres.some((g) => filmGenres.includes(g)));
+            setfilmsAvecGenresSimilaires(filmFiltre);
+          })
+          .catch((error) => {
+            console.error("Erreur lors de la recherche de films :", error);
+          });
       })
       .catch((error) => {
-        console.error("Erreur de fetch:", error);
+        console.error("Erreur de fetch :", error);
       });
-  }, [urlFilm, id]);
+  }, [urlFilm, id, urltoutFilms]);
+
 
   if (!film) {
     return <div>Données non trouvées</div>;
@@ -53,7 +63,7 @@ export function Film(props) {
       const data = await response.json();
       setFilm((prevData) => ({ ...prevData, notes: data.notes }));
     } catch (error) {
-      console.error("Erreur de mise à jour des notes:", error);
+      console.error("Erreur lors de la mise à jour des notes :", error);
     }
   };
 
@@ -76,7 +86,7 @@ export function Film(props) {
       const data = await response.json();
       setFilm((prevData) => ({ ...prevData, commentaire: data.commentaire }));
     } catch (error) {
-      console.error("Erreur de mise à jour des commentaires:", error);
+      console.error("Erreur lors de la mise à jour des commentaires :", error);
     }
   };
 
@@ -104,15 +114,28 @@ export function Film(props) {
           <Animations animationVariants="basVersHaut">
             <div className="film-details">
               <h1>{film.titre}</h1>
-              <p>Réalisateur: {film.realisation}</p>
-              <p>Année: {film.annee}</p>
-              <p>Description: {film.description}</p>
+              <p>Réalisateur : {film.realisation}</p>
+              <p>Année : {film.annee}</p>
+              <p>Description : {film.description}</p>
+              <p>
+                {film.genres.length > 1 ? 'Genres : ' : 'Genre : '}
+                {film.genres.map((genre, index) => (
+                  <span key={genre}>
+                    {genre}
+                    {index !== film.genres.length - 1 && ', '}
+                  </span>
+                ))}
+              </p>
               <StarRating rating={moyenneNotes} onRate={soumettreNote} />
               {blockAjoutCommentaire}
             </div>
           </Animations>
         </div>
         <Commentaires commentaires={film.commentaire} />
+        <Animations animationVariants="goucheVersDroit">
+          {console.log("Films avec des genres similaires :", filmsAvecGenresSimilaires)}
+          <Carrossel films={filmsAvecGenresSimilaires} />
+        </Animations>
       </div>
     );
 }

@@ -1,0 +1,55 @@
+.carrossel-container {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .carrossel {
+    display: flex;
+    margin-top: 20px;
+  }
+  
+  .carrossel-item {
+    flex: 0 0 auto;
+    transition: opacity 0.3s ease-in-out;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .carrossel-item:last-child {
+    margin-right: 0;
+  }
+  
+  .carrossel-item img {
+    max-width: 100px; 
+    border-radius: 5px;
+  }
+  
+  .carrossel-item:focus,
+  .carrossel-item:hover {
+    opacity: 1;
+  }
+  
+  .carrossel-item:not(:focus):not(:hover) {
+    opacity: 0.5;
+    filter: blur(2px);
+  }
+  
+  .carrossel-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: transparent;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    z-index: 1;
+  }
+  
+  .prev {
+    left: 10px;
+  }
+  
+  .next {
+    right: 10px;
+  }
+  
