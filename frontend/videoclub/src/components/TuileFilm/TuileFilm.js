@@ -1,15 +1,22 @@
-import React from 'react';
+import React from "react";
+import { Link } from "react-router-dom";
 import "./TuileFilm.css";
 
-function TuileFilm({ props }) {
+function TuilesFilm({ films, className }) {
   return (
-    <article>
-      <img src={`img/${props.titreVignette}`} alt={props.titre} />
-      <h2>{props.titre}</h2>
-      <p>Diretor: {props.realisateur}</p>
-      <p>Ano: {props.annee}</p>
-    </article>
+    <div className={`films-container ${className}`}>
+      {films.map((film) => (
+        <Link key={film.id} to={`/film/${film.id}`} className="film-card-link">
+          <div className="film-card">
+            <img src={`img/${film.titreVignette}`} alt={film.titre} />
+            <h3>{film.titre}</h3>
+            <p>Réalisateur: {film.realisateur}</p>
+            <p>Année: {film.annee}</p>
+          </div>
+        </Link>
+      ))}
+    </div>
   );
 }
 
-export default TuileFilm;
+export default TuilesFilm;

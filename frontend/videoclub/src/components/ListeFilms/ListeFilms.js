@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import "./ListeFilms.css";
-import TuileFilm from "../TuileFilm/TuileFilm";
+import TuilesFilm from "../TuileFilm/TuileFilm";
 import Filtres from "../Filtres/Filtres";
 
 function ListeFilms() {
@@ -24,21 +23,6 @@ function ListeFilms() {
   const filtre = (filterUrl) => {
     setUrlFiltre(filterUrl);
   };
-
-  const tuilesFilm = (
-    <div className="films-container">
-      {listeFilms.map((film) => (
-        <Link key={film.id} to={`/film/${film.id}`} className="film-card-link">
-          <div className="film-card">
-            <img src={`img/${film.titreVignette}`} alt={film.titre} />
-            <h3>{film.titre}</h3>
-            <p>Réalisateur: {film.realisateur}</p>
-            <p>Année: {film.annee}</p>
-          </div>
-        </Link>
-      ))}
-    </div>
-  );
 
   const transition = { duration: 1.5, ease: "easeInOut" };
 
@@ -72,8 +56,9 @@ function ListeFilms() {
           animate="visible"
           exit="exit"
           variants={animationBasVersHaut}
-        >
-          {tuilesFilm}
+        ><div>
+          <TuilesFilm className="grid-film wrapper" films={listeFilms} />
+          </div>
         </motion.div>
       ) : (
         <div className="container">

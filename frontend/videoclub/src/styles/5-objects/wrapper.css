@@ -1,3 +1,7 @@
 .wrapper{
- padding: 0 var(--space-small);   
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: var(--largeur-max-conteneur);
+    margin: 0 auto; 
 }

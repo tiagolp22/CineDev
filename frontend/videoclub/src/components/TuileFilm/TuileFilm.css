@@ -1,28 +1,60 @@
-.tuile-film {
-    border-radius: var(--bordure-radius-moyen);
-    padding: var(--espace-petit);
-    background-color: var(--couleur-blanc);
-    box-shadow: var(--ombre-legere);
-    transition: transform 0.4s ease-in-out;
-  }
-  
-  .tuile-film:hover {
-    transform: translateY(-5px);
-  }
-  
-  .tuile-film img {
-    width: 100%;
-    height: auto;
-    border-radius: var(--bordure-radius-petit);
-  }
-  
-  .tuile-film h2 {
-    font-size: var(--taille-texte-grand);
-    margin-bottom: var(--espace-petit);
-  }
-  
-  .tuile-film p {
-    font-size: var(--taille-texte-moyen);
-    margin-bottom: var(--espace-petit);
-  }
-  
+.films-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  justify-content: space-between;
+}
+
+.film-card-link {
+  text-decoration: none;
+  color: inherit;
+  position: relative;
+  width: 250px;
+  overflow: hidden;
+  flex: 1 1 calc(25% - 40px); /* 4 items per row */
+}
+
+.film-card {
+  position: relative;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.film-card img {
+  width: 100%;
+  display: block;
+}
+
+.film-card h3,
+.film-card p {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+  text-align: center;
+  margin: 0;
+}
+
+.film-card h3 {
+  top: 20%;
+  font-size: 1.2em;
+}
+
+.film-card p {
+  top: 40%;
+}
+
+.film-card p:last-of-type {
+  top: 60%;
+}
+
+.films-container:hover .film-card {
+  opacity: 0.5;
+  filter: blur(2px);
+}
+
+.films-container .film-card:hover {
+  opacity: 1;
+  filter: none;
+  transform: scale(1.05);
+}
