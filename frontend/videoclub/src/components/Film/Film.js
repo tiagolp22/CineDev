@@ -4,6 +4,7 @@ import { AppContext } from '../App/App';
 import Commentaires from '../Commentaires/Commentaires';
 import StarRating from '../StarRating/StarRating';
 import "./Film.css";
+import Animations from '../Animations/Animations';
 
 export function Film(props) {
   const { id } = useParams();
@@ -94,22 +95,26 @@ export function Film(props) {
     ? film.notes.reduce((acc, note) => acc + note, 0) / film.notes.length
     : 0;
 
-  return (
-    <div className="film">
-      <div className="film-header">
-        <img src={`/img/${film.titreVignette}`} alt={film.titre} className="film-image" />
-        <div className="film-details">
-          <h1>{film.titre}</h1>
-          <p>Réalisateur: {film.realisation}</p>
-          <p>Année: {film.annee}</p>
-          <p>Description: {film.description}</p>
-          <StarRating rating={moyenneNotes} onRate={soumettreNote} />
-          {blockAjoutCommentaire}
+    return (
+      <div className="film">
+        <div className="film-header">
+          <Animations animationVariants="goucheVersDroit">
+            <img src={`/img/${film.titreVignette}`} alt={film.titre} className="film-image" />
+          </Animations>
+          <Animations animationVariants="basVersHaut">
+            <div className="film-details">
+              <h1>{film.titre}</h1>
+              <p>Réalisateur: {film.realisation}</p>
+              <p>Année: {film.annee}</p>
+              <p>Description: {film.description}</p>
+              <StarRating rating={moyenneNotes} onRate={soumettreNote} />
+              {blockAjoutCommentaire}
+            </div>
+          </Animations>
         </div>
+        <Commentaires commentaires={film.commentaire} />
       </div>
-      <Commentaires commentaires={film.commentaire} />
-    </div>
-  );
+    );
 }
 
 export default Film;
