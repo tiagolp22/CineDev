@@ -5,6 +5,7 @@
   margin: 0;
   border-radius: var(--bordure-radius-moyen);
   overflow: hidden;
+  padding: 16px;
 }
 
 .filtre li {
@@ -40,4 +41,12 @@
 
 .filtre li.active {
   color: var(--couleur-texte-inverse);
+}
+
+.wrapper{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: var(--largeur-max-conteneur);
+  margin: 0 auto; 
 }

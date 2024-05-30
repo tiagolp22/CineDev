@@ -20,7 +20,7 @@ function Filtre({ filtre, urlListeFilm }) {
   ];
 
   return (
-    <ul className="filtre">
+    <ul className="filtre wrapper">
       {filtres.map(({ label, orderBy, orderDirection }) => (
         <li
           key={`${orderBy}-${orderDirection}`}
