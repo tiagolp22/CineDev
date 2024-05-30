@@ -23,6 +23,7 @@ export function Film(props) {
         if (!data.commentaire) {
           data.commentaire = [];
         }
+        console.log("Data retornada pelo fetch:", data);
         setFilm(data);
       })
       .catch((error) => {
@@ -99,7 +100,7 @@ export function Film(props) {
         <img src={`/img/${film.titreVignette}`} alt={film.titre} className="film-image" />
         <div className="film-details">
           <h1>{film.titre}</h1>
-          <p>Réalisateur: {film.realisateur}</p>
+          <p>Réalisateur: {film.realisation}</p>
           <p>Année: {film.annee}</p>
           <p>Description: {film.description}</p>
           <StarRating rating={moyenneNotes} onRate={soumettreNote} />

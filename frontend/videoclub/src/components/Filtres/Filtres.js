@@ -20,6 +20,7 @@ function Filtre({ filtre, urlListeFilm }) {
   ];
 
   return (
+    <div className="filtre-flex">
     <ul className="filtre wrapper">
       {filtres.map(({ label, orderBy, orderDirection }) => (
         <li
@@ -31,6 +32,7 @@ function Filtre({ filtre, urlListeFilm }) {
         </li>
       ))}
     </ul>
+    </div>
   );
 }
 

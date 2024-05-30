@@ -3,11 +3,3 @@
   flex-wrap: wrap;
   gap: 20px;
 }
-
-.wrapper{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  max-width: var(--largeur-max-conteneur);
-  margin: 0 auto; 
-}

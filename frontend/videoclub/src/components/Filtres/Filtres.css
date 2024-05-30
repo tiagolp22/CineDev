@@ -1,3 +1,9 @@
+.filtre-flex {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
 .filtre {
   display: flex;
   list-style: none;
@@ -6,6 +12,8 @@
   border-radius: var(--bordure-radius-moyen);
   overflow: hidden;
   padding: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .filtre li {
@@ -15,6 +23,9 @@
   transition: color 0.3s;
   margin: 0 var(--espace-petit);
   position: relative;
+  flex: 1 1 calc(15%);
+  box-sizing: border-box;
+  text-align: center;
 }
 
 .filtre li::after {
@@ -43,10 +54,10 @@
   color: var(--couleur-texte-inverse);
 }
 
-.wrapper{
+.wrapper {
   display: flex;
-  justify-content: space-between;
+  
   align-items: center;
   max-width: var(--largeur-max-conteneur);
-  margin: 0 auto; 
+  margin: 0 auto;
 }
