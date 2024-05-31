@@ -102,7 +102,7 @@ export function Film(props) {
   }
 
   const moyenneNotes = film.notes && film.notes.length
-    ? film.notes.reduce((acc, note) => acc + note, 0) / film.notes.length
+    ? film.notes.reduce((sum, note) => sum + note, 0) / film.notes.length
     : 0;
 
     return (
@@ -110,6 +110,7 @@ export function Film(props) {
         <div className="film-header">
           <Animations animationVariants="goucheVersDroit">
             <img src={`/img/${film.titreVignette}`} alt={film.titre} className="film-image" />
+            <StarRating rating={moyenneNotes} onRate={soumettreNote} />
           </Animations>
           <Animations animationVariants="basVersHaut">
             <div className="film-details">
@@ -126,14 +127,12 @@ export function Film(props) {
                   </span>
                 ))}
               </p>
-              <StarRating rating={moyenneNotes} onRate={soumettreNote} />
               {blockAjoutCommentaire}
             </div>
           </Animations>
         </div>
         <Commentaires commentaires={film.commentaire} />
         <Animations animationVariants="goucheVersDroit">
-          {console.log("Films avec des genres similaires :", filmsAvecGenresSimilaires)}
           <Carrossel films={filmsAvecGenresSimilaires} />
         </Animations>
       </div>

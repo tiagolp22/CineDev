@@ -57,3 +57,8 @@ button:hover {
   background-color: var(--couleur-secondaire);
 }
 
+.star-rating{
+  align-items: center;
+  padding: 10px;
+}
+

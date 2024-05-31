@@ -16,7 +16,6 @@ function Entete(props) {
           </NavLink>
           <nav>
             {context.isLogged && context.isAdmin && <NavLink to='admin'>Admin</NavLink>}
-            <NavLink to="films">Liste des films</NavLink>
           </nav>
         </div>
 
@@ -33,6 +32,7 @@ function Entete(props) {
           </form>
         )}
       </div>
+      <NavLink className={"liste-film"} to="films">Liste des films</NavLink>
     </header>
   );
 }

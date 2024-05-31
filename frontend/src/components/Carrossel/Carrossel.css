@@ -29,10 +29,10 @@
     opacity: 1;
   }
   
-  .carrossel-item:not(:focus):not(:hover) {
+  /*.carrossel-item:not(:focus):not(:hover) {
     opacity: 0.5;
-    filter: blur(2px);
-  }
+    filter: blur(1px);
+  }*/
   
   .carrossel-button {
     position: absolute;

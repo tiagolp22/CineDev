@@ -50,9 +50,23 @@ nav a:hover {
   background-color:#bb9614;
 }
 
+.liste-film {
+  display: block;
+  text-align: center;
+  margin-top: 20px;
+  color: var(--couleur-texte); 
+  text-decoration: none; 
+  font-size: 18px; 
+  font-weight: bold; 
+  margin-bottom: 10px;
+}
+
+.liste-film:hover {
+  text-decoration: underline;
+}
+
 .logo {
-  width: 150px;
-  /* animation: colorChange 5s infinite alternate; */
+  width: 120px;
 }
 
 /* @keyframes colorChange {
