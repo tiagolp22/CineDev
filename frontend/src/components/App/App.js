@@ -20,9 +20,9 @@ export const AppContext = React.createContext();
 
 function App() {
 
-  let appState = "DEV";// PROD
+  let appState = "PROD";// PROD
   
-  let apiBaseURL = "https://api-film-1.onrender.com/";
+  let apiBaseURL = "https://cinedev.onrender.com/";
 
   if(appState === "DEV"){
     apiBaseURL = "http://localhost:5501/";
