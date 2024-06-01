@@ -14,6 +14,7 @@ export function Film(props) {
   const context = useContext(AppContext);
   const urlFilm = `https://api-film-1.onrender.com/films/${id}`;
   const urltoutFilms = "https://api-film-1.onrender.com/films";
+  
 
   useEffect(() => {
     fetch(urlFilm)
@@ -47,8 +48,12 @@ export function Film(props) {
   }
 
   const soumettreNote = async (note) => {
+    if (!context.isLogged) {
+      return;
+    }
+  
     const updatedNotes = film.notes ? [...film.notes, note] : [note];
-
+  
     const oOptions = {
       method: "PUT",
       headers: {
@@ -56,7 +61,7 @@ export function Film(props) {
       },
       body: JSON.stringify({ notes: updatedNotes }),
     };
-
+  
     try {
       await fetch(urlFilm, oOptions);
       const response = await fetch(urlFilm);
@@ -66,12 +71,17 @@ export function Film(props) {
       console.error("Erreur lors de la mise à jour des notes :", error);
     }
   };
-
+  
+  
   const soumettreCommentaire = async (e) => {
     e.preventDefault();
-    let aCommentaires = film.commentaire || [];
-    aCommentaires.push({ commentaire: e.target.commentaire.value, auteur: context.nom });
-
+    let aCommentaires = JSON.parse(localStorage.getItem('commentaires')) || [];
+    aCommentaires.push({ 
+      commentaire: e.target.commentaire.value, 
+      auteur: context.email, 
+      date: new Date().toISOString() 
+    });
+  
     const oOptions = {
       method: "PUT",
       headers: {
@@ -79,16 +89,18 @@ export function Film(props) {
       },
       body: JSON.stringify({ commentaire: aCommentaires }),
     };
-
+  
     try {
       await fetch(urlFilm, oOptions);
       const response = await fetch(urlFilm);
       const data = await response.json();
       setFilm((prevData) => ({ ...prevData, commentaire: data.commentaire }));
+      localStorage.setItem('commentaires', JSON.stringify(aCommentaires));
     } catch (error) {
       console.error("Erreur lors de la mise à jour des commentaires :", error);
     }
   };
+  
 
   let blockAjoutCommentaire;
 
