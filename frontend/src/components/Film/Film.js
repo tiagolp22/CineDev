@@ -6,6 +6,7 @@ import StarRating from '../StarRating/StarRating';
 import "./Film.css";
 import Animations from '../Animations/Animations';
 import Carrossel from '../Carrossel/Carrossel';
+import Loader from '../Loader/Loader';
 
 export function Film(props) {
   const { id } = useParams();
@@ -44,7 +45,7 @@ export function Film(props) {
 
 
   if (!film) {
-    return <div>Données non trouvées</div>;
+    return <Loader />;
   }
 
   const soumettreNote = async (note) => {
