@@ -2,7 +2,7 @@
   display: block;
   overflow: hidden;
   width: 100%;
-  max-width: 1000px;
+  max-width: 90vw;
   margin: 0 auto;
   padding: 20px;
 }
@@ -12,6 +12,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  color: var(--couleur-texte);
 }
 
 .carrossel-image {
