@@ -1,5 +1,6 @@
 import React from "react";
 import Carousel from "react-multi-carousel";
+import { Link } from "react-router-dom";
 import "react-multi-carousel/lib/styles.css";
 import "./Carrossel.css";
 
@@ -35,14 +36,14 @@ function Carrossel({ films }) {
         arrows
       >
         {films.map((film) => (
-          <div key={film.id} className="carrossel-item">
+          <Link key={film.id} to={`/film/${film.id}`} className="carrossel-item">
             <img
               src={`/img/${film.titreVignette}`}
               alt={film.titre}
               className="carrossel-image"
             />
             <p className="carrossel-title">{film.titre}</p>
-          </div>
+          </Link>
         ))}
       </Carousel>
     </div>

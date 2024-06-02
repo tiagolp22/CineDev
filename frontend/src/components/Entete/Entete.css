@@ -54,16 +54,23 @@ nav a:hover {
   display: block;
   text-align: center;
   margin-top: 20px;
-  color: var(--couleur-texte); 
+  color: #F5C518;
   text-decoration: none; 
   font-size: 18px; 
   font-weight: bold; 
   margin-bottom: 10px;
+  transition: color 0.3s;
 }
 
 .liste-film:hover {
   text-decoration: underline;
+  color: #ffee00;
 }
+
+.liste-film:active {
+  color: #F5C518;
+}
+
 
 .logo {
   width: 120px;
