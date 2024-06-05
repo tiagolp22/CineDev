@@ -15,7 +15,7 @@ function Entete(props) {
             <img className="logo" src="/img/cineDev2.gif" alt="Logo"/>
           </NavLink>
           <nav>
-            {context.isLogged && context.isAdmin && <NavLink to='admin'>Admin</NavLink>}
+            {<NavLink to='admin'>Admin</NavLink>}
           </nav>
         </div>
 

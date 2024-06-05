@@ -15,12 +15,13 @@ import ListeFilms from "../ListeFilms/ListeFilms";
 import Film from "../Film/Film";
 import { Navigate } from "react-router-dom";
 import Admin from "../Admin/Admin";
+import PrivateRoute from "../PrivateRoute/PrivateRoute";
 
 export const AppContext = React.createContext();
 
 function App() {
 
-  let appState = "PROD";// PROD
+  let appState = "DEV";// PROD
   
   let apiBaseURL = "https://cinedev.onrender.com/";
 
@@ -102,20 +103,25 @@ function App() {
 
   return (
     <AppContext.Provider value={usager}>
-
       {/* <Router> */}
         {/* <Entete handleLogin={login} /> */}
         <Entete handleLogin={login} handleLogout={logout} />
         <AnimatePresence mode='wait'>
           <Routes location={location} key={location.key}>
+
+            <Route element={<PrivateRoute/>}>
+              <Route
+                path="/admin"
+                element={<Admin /> }
+              />
+
+            </Route>
+
             <Route path="/" element={<Accueil />} />
             <Route path="/films" element={<ListeFilms />} />
             <Route path="/film/:id" element={<Film />} />
 
-            <Route
-              path="/admin"
-              element={usager.isLogged ? <Admin /> : <Navigate to="/" />}
-            />
+            
           </Routes>
         </AnimatePresence>
       {/* </Router> */}
