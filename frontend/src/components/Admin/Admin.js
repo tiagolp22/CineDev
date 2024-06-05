@@ -16,44 +16,50 @@ function Admin(props) {
   ]);
   const [choisiGenres, setchoisiGenres] = useState([]);
   const [nouveauGenre, setnouveauGenre] = useState("");
+  const [titreVignetteFile, settitreVignetteFile] = useState(null);
+  const [formValues, setFormValues] = useState({
+    titre: "",
+    description: "",
+    realisation: "",
+    annee: "",
+  });
 
   async function onSubmit(e) {
     e.preventDefault();
-    const form = e.currentTarget;
-
+  
     if (nouveauGenre && !choisiGenres.includes(nouveauGenre)) {
-      choisiGenres.push(nouveauGenre);
+      setchoisiGenres([...choisiGenres, nouveauGenre]);
     }
-
-    const data = {
-      titre: form.titre.value,
-      genres: choisiGenres,
-      description: form.description.value,
-      titreVignette: form.titreVignette.value,
-      realisation: form.realisation.value,
-      annee: form.annee.value,
-    };
-
+  
+    const formData = new FormData();
+    formData.append("titre", formValues.titre);
+    formData.append("genres", JSON.stringify(choisiGenres));
+    formData.append("description", formValues.description);
+    formData.append("realisation", formValues.realisation);
+    formData.append("annee", formValues.annee);
+    if (titreVignetteFile) {
+      formData.append("titreVignetteFile", titreVignetteFile);
+    }
+  
     const token = `Bearer ${localStorage.getItem("api-token")}`;
     const options = {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
         authorization: token,
       },
-      body: JSON.stringify(data),
+      body: formData,
     };
-
+  
     try {
       const response = await fetch("http://localhost:5501/api/films", options);
       const json = await response.json();
       console.log(json);
-
+  
       if (response.status === 200) {
         navigate("/films");
       }
     } catch (error) {
-      console.error("Erro ao enviar o formulário", error);
+      console.error("Error", error);
     }
   }
 
@@ -67,13 +73,28 @@ function Admin(props) {
     }
   }
 
+  function handleInputChange(e) {
+    const { name, value } = e.target;
+    setFormValues({
+      ...formValues,
+      [name]: value,
+    });
+  }
+
   return (
     <main>
       <div className="wrapper">
-        <form className="form" onSubmit={onSubmit}>
+        <form className="form" onSubmit={onSubmit} encType="multipart/form-data">
+          <h2>ADD FILM</h2>
           <div className="form__group">
             <label className="form__label" htmlFor="titre">Titre</label>
-            <input className="form__input" type="text" name="titre" />
+            <input
+              className="form__input"
+              type="text"
+              name="titre"
+              value={formValues.titre}
+              onChange={handleInputChange}
+            />
           </div>
           <div className="form__group">
             <label className="form__label">Genres</label>
@@ -102,19 +123,41 @@ function Admin(props) {
           </div>
           <div className="form__group">
             <label className="form__label" htmlFor="description">Description</label>
-            <textarea className="form__textarea" name="description"></textarea>
+            <textarea
+              className="form__textarea"
+              name="description"
+              value={formValues.description}
+              onChange={handleInputChange}
+            ></textarea>
           </div>
           <div className="form__group">
             <label className="form__label" htmlFor="titreVignette">Titre Vignette</label>
-            <input className="form__input" type="text" name="titreVignette" />
+            <input
+              className="form__input"
+              type="file"
+              name="titreVignetteFile"
+              onChange={(e) => settitreVignetteFile(e.target.files[0])}
+            />
           </div>
           <div className="form__group">
             <label className="form__label" htmlFor="realisation">Réalisation</label>
-            <input className="form__input" type="text" name="realisation" />
+            <input
+              className="form__input"
+              type="text"
+              name="realisation"
+              value={formValues.realisation}
+              onChange={handleInputChange}
+            />
           </div>
           <div className="form__group">
             <label className="form__label" htmlFor="annee">Année</label>
-            <input className="form__input" type="text" name="annee" />
+            <input
+              className="form__input"
+              type="text"
+              name="annee"
+              value={formValues.annee}
+              onChange={handleInputChange}
+            />
           </div>
           <button className="form__button" type="submit">Ajouter Film</button>
         </form>

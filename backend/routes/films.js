@@ -1,8 +1,22 @@
 const express = require("express");
+const multer = require("multer");
 const router = express.Router();
 const db = require("../config/db.js");
 const { check, validationResult } = require("express-validator");
 const auth = require("../middlewares/auth.js");
+const path = require("path");
+
+
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, path.join(__dirname, "../public/img"));
+    },
+    filename: function (req, file, cb) {
+      cb(null, `${Date.now()}-${file.originalname}`);
+    },
+  });
+  const upload = multer({ storage });
 
 /**
  * Cette route permet de récupérer la liste des films
@@ -81,31 +95,36 @@ router.get("/:id", [check("id").escape().trim().notEmpty()], async (req, res) =>
 router.post(
     "/",
     auth,
+    upload.single("titreVignetteFile"),
     [
-        check("titre").escape().trim().notEmpty().isString(),
-        check("genres").escape().trim().exists().isArray(),
-        check("description").escape().trim().notEmpty().isString(),
-        check("titreVignette").escape().trim().notEmpty().isString(),
-        check("realisation").escape().trim().notEmpty().isString(),
-        check("annee").escape().trim().notEmpty().isString(),
+      check("titre").escape().trim().notEmpty().isString(),
+      check("genres").escape().trim().exists()/*.isArray()*/,
+      check("description").escape().trim().notEmpty().isString(),
+      check("titreVignette").escape().trim().optional(true).isString(),
+      check("realisation").escape().trim().notEmpty().isString(),
+      check("annee").escape().trim().notEmpty().isString(),
     ],
     async (req, res) => {
-        try {
-            const validation = validationResult(req);
-            if (!validation.isEmpty()) {
-                return res.status(400).json({ message: "Données invalides" });
-            }
-
-            const film = req.body;
-            const doc = await db.collection("films").add(film);
-            film.id = doc.id;
-            res.json(film);
-        } catch (err) {
-            console.log(err);
-            res.status(500).send(err);
+      try {
+        const validation = validationResult(req);
+        if (!validation.isEmpty()) {
+          return res.status(400).json({ message: "Données invalides" });
         }
+  
+        const film = req.body;
+        if (req.file) {
+          film.titreVignette = `/img/${req.file.filename}`;
+        }
+  
+        const doc = await db.collection("films").add(film);
+        film.id = doc.id;
+        res.json(film);
+      } catch (err) {
+        console.log(err);
+        res.status(500).send(err);
+      }
     }
-);
+  );
 
 /**
  * Cette route permet de modifier un film
