@@ -21,7 +21,7 @@ export const AppContext = React.createContext();
 
 function App() {
 
-  let appState = "DEV";// PROD
+  let appState = "PROD";// PROD
   
   let apiBaseURL = "https://cinedev.onrender.com/";
 

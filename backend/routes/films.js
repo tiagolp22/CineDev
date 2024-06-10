@@ -113,7 +113,7 @@ router.post(
   
         const film = req.body;
         if (req.file) {
-          film.titreVignette = `/img/${req.file.filename}`;
+          film.titreVignette = `${req.file.filename}`;
         }
   
         const doc = await db.collection("films").add(film);
