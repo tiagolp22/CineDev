@@ -24,6 +24,21 @@ function ListeFilms() {
     setUrlFiltre(filterUrl);
   };
 
+  const deleteFilm = async (id) => {
+    const urlDeleteFilm = `https://api-film-1.onrender.com/films/${id}`;
+
+    try {
+      const response = await fetch(urlDeleteFilm, { method: 'DELETE' });
+      if (response.ok) {
+        setListeFilms((prevFilms) => prevFilms.filter((film) => film.id !== id));
+      } else {
+        console.error('Erreur lors de la suppression du film');
+      }
+    } catch (error) {
+      console.error('Erreur lors de la suppression du film:', error);
+    }
+  };
+
   return (
     <main>
       <Animations animationVariants="goucheVersDroit">
@@ -31,7 +46,7 @@ function ListeFilms() {
       </Animations>
       <Animations animationVariants="basVersHaut">
         {estCharge ? (
-          <TuilesFilm className="grid-film wrapper" films={listeFilms} />
+          <TuilesFilm className="grid-film wrapper" films={listeFilms} onDelete={deleteFilm} />
         ) : (<Loader />)}
       </Animations>
     </main>

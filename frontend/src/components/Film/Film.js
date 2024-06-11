@@ -15,7 +15,6 @@ export function Film(props) {
   const context = useContext(AppContext);
   const urlFilm = `https://api-film-1.onrender.com/films/${id}`;
   const urltoutFilms = "https://api-film-1.onrender.com/films";
-  
 
   useEffect(() => {
     fetch(urlFilm)
@@ -26,6 +25,9 @@ export function Film(props) {
         return response.json();
       })
       .then((filmData) => {
+        if (typeof filmData.genres === 'string') {
+          filmData.genres = JSON.parse(filmData.genres);
+        }
         const filmGenres = filmData.genres || [];
         setFilm(filmData);
         fetch(urltoutFilms)
@@ -76,7 +78,7 @@ export function Film(props) {
   
   const soumettreCommentaire = async (e) => {
     e.preventDefault();
-    let aCommentaires = JSON.parse(localStorage.getItem('commentaires')) || [];
+    const aCommentaires = JSON.parse(localStorage.getItem(`commentaires_${id}`)) || [];
     aCommentaires.push({ 
       commentaire: e.target.commentaire.value, 
       auteur: context.email, 
@@ -96,11 +98,12 @@ export function Film(props) {
       const response = await fetch(urlFilm);
       const data = await response.json();
       setFilm((prevData) => ({ ...prevData, commentaire: data.commentaire }));
-      localStorage.setItem('commentaires', JSON.stringify(aCommentaires));
+      localStorage.setItem(`commentaires_${id}`, JSON.stringify(aCommentaires));
     } catch (error) {
       console.error("Erreur lors de la mise à jour des commentaires :", error);
     }
   };
+  
   
 
   let blockAjoutCommentaire;

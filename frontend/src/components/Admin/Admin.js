@@ -33,7 +33,9 @@ function Admin(props) {
   
     const formData = new FormData();
     formData.append("titre", formValues.titre);
-    formData.append("genres", JSON.stringify(choisiGenres));
+    choisiGenres.forEach(genre => {
+      formData.append("genres[]", genre);
+    });
     formData.append("description", formValues.description);
     formData.append("realisation", formValues.realisation);
     formData.append("annee", formValues.annee);
