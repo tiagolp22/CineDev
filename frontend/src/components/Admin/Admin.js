@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Admin.css";
 
-function Admin(props) {
+function Admin({ apiBaseURL }) {
   const navigate = useNavigate();
   const [genres, setGenres] = useState([
     "Action",
@@ -53,7 +53,7 @@ function Admin(props) {
     };
   
     try {
-      const response = await fetch("http://localhost:5501/api/films", options);
+      const response = await fetch(`${apiBaseURL}api/films`, options);
       const json = await response.json();
       console.log(json);
   

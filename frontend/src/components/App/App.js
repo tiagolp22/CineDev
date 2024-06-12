@@ -110,10 +110,8 @@ function App() {
           <Routes location={location} key={location.key}>
 
             <Route element={<PrivateRoute/>}>
-              <Route
-                path="/admin"
-                element={<Admin /> }
-              />
+            <Route path="/admin" element={<Admin apiBaseURL={apiBaseURL} />} />
+
 
             </Route>
 
