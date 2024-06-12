@@ -150,17 +150,17 @@ router.put(
             }
 
             //Si vous vouliez empêcher l'ajout de champs supplémentaires, envoyez ceci dans la méthode update
-            // const { titre, genres, description, titreVignette, realisation, annee } = req.body;
+            const { titre, genres, description, titreVignette, realisation, annee } = req.body;
 
-            //On crée un nouvel objet contenant uniquement les champs nécessaires à la modification
-            // const modifications = {
-            //     ...(titre ? { titre } : {}),
-            //     ...(genres ? { genres } : {}),
-            //     ...(description ? { description } : {}),
-            //     ...(titreVignette ? { titreVignette } : {}),
-            //     ...(realisation ? { realisation } : {}),
-            //     ...(annee ? { annee } : {}),
-            // };
+           // On crée un nouvel objet contenant uniquement les champs nécessaires à la modification
+            const modifications = {
+                ...(titre ? { titre } : {}),
+                ...(genres ? { genres } : {}),
+                ...(description ? { description } : {}),
+                ...(titreVignette ? { titreVignette } : {}),
+                ...(realisation ? { realisation } : {}),
+                ...(annee ? { annee } : {}),
+            };
 
             const id = req.params.id; //Le id passé dans la route
             const film = req.body; //Les informations à changer

@@ -131,7 +131,7 @@ export function Film(props) {
           <Animations animationVariants="basVersHaut">
             <div className="film-details">
               <h1>{film.titre}</h1>
-              <p>Réalisateur : {film.realisation}</p>
+              <h2>Réalisateur : {film.realisation}</h2>
               <p>Année : {film.annee}</p>
               <p>Description : {film.description}</p>
               <p>

@@ -15,10 +15,10 @@
   
   /* Tailles de police */
   :root {
-    --taille-texte-petit: 0.875rem;
-    --taille-texte-moyen: 1rem;
-    --taille-texte-grand: 1.25rem;
-    --taille-texte-tres-grand: 1.5rem;
+    --taille-texte-petit: 1rem;
+    --taille-texte-moyen: 1.25rem;
+    --taille-texte-grand: 1.5rem;
+    --taille-texte-tres-grand: 2rem;
   }
   
   /* Bordures */

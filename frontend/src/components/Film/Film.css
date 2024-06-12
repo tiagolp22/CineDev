@@ -3,7 +3,7 @@
   flex-direction: column;
   align-items: center;
   padding: 20px;
-  max-width: 800px;
+  max-width: 1000px;
   margin: 0 auto;
 }
 
@@ -18,7 +18,7 @@
 
 .film-image {
   width: 100%;
-  max-width: 400px;
+  max-width: 500px;
   margin-right: 20px;
   border-radius: var(--bordure-radius-moyen);
 }
@@ -63,3 +63,20 @@ button:hover {
   padding: 10px;
 }
 
+@media (max-width: 800px) {
+  .film-header {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .film-image {
+    margin-right: 0;
+    margin-bottom: 20px;
+    max-width: 100%;
+  }
+
+  .film-details {
+    padding-left: 0;
+    text-align: center;
+  }
+}

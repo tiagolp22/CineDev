@@ -6,8 +6,8 @@
 
 .film-card-container {
   position: relative;
-  max-width: 250px;
   flex: 1 1 calc(25% - 40px);
+  min-width: 200px;
 }
 
 .film-card-link {

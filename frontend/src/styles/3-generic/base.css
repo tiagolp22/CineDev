@@ -12,15 +12,15 @@ body {
   }
   
   h1 {
-    font-size: var(--taille-texte-tres-grand);
+    font-size: var(--taille-texte-super);
   }
   
   h2 {
-    font-size: var(--taille-texte-grand);
+    font-size: var(--taille-texte-tres-grand);
   }
   
   h3 {
-    font-size: var(--taille-texte-moyen);
+    font-size: var(--taille-texte-grand);
   }
   
   .container {
