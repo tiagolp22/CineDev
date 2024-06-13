@@ -16,6 +16,7 @@ import Film from "../Film/Film";
 import { Navigate } from "react-router-dom";
 import Admin from "../Admin/Admin";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
+import Erreur404 from "../Erreur404/Erreur404";
 
 export const AppContext = React.createContext();
 
@@ -118,7 +119,7 @@ function App() {
             <Route path="/" element={<Accueil />} />
             <Route path="/films" element={<ListeFilms />} />
             <Route path="/film/:id" element={<Film />} />
-
+            <Route path="*" element={<Erreur404 />} />
             
           </Routes>
         </AnimatePresence>
