@@ -5,12 +5,11 @@ const auth = async (req, res, next) => {
   try {
     const authorization = req.headers.authorization;
 
-    // Vérifie si l'en-tête d'autorisation existe
-    if (!authorization) {
+    if (!authorization || !token) {
       return res.status(401).json({ message: "Non autorisé" });
     }
 
-    const token = authorization.split(" ")[1];
+    const token = authorization && authorization.startsWith('Bearer ') ? authorization.split(' ')[1] : null;
 
     // Vérifie si le token a été fourni
     if (!token) {

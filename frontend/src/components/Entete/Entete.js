@@ -7,12 +7,11 @@ function Entete(props) {
   const context = useContext(AppContext);
 
   return (
-    //TODO Ajouter l'etat de connexion
     <header>
       <div className="wrapper">
         <div className="entete">
           <NavLink to="/">
-            <img className="logo" src="/img/cineDev2.gif" alt="Logo"/>
+            <img className="logo" src="/img/cineDev2.gif" alt="Logo" />
           </NavLink>
           <nav>
             {<NavLink to='admin'>Admin</NavLink>}

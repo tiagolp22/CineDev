@@ -71,6 +71,7 @@ router.post(
             minNumbers: 1,
             minSymbols: 1,
         }),
+        check("nom").escape().trim().notEmpty(),
     ],
     async (req, res) => {
         try {
@@ -79,9 +80,10 @@ router.post(
                 return res.status(400).json({ message: "Données invalides" });
             }
 
-            const motDePasse = req.body.mdp;
-            const courriel = req.body.courriel;
-
+            
+            // const motDePasse = req.body.mdp;
+            // const courriel = req.body.courriel;
+            const { courriel, mdp, nom } = req.body;
             const docRef = await db.collection("utilisateurs").where("courriel", "==", courriel).get();
             const utilisateurs = [];
 
@@ -94,7 +96,7 @@ router.post(
                 res.json({ message: "Courriel déjà utilisé" });
             } else {
                 const hash = await bcrypt.hash(motDePasse, 10);
-                const user = { courriel, mdp: hash };
+                const user = { courriel, mdp: hash, nom };
                 const doc = await db.collection("utilisateurs").add(user);
                 user.id = doc.id;
                 user.token = genererToken(user.id);
@@ -140,12 +142,13 @@ router.post(
                 res.json({ message: "Le courriel n'existe pas" });
             } else {
                 const resultatConnexion = await bcrypt.compare(motDePasse, utilisateur.mdp);
-
+                
                 if (resultatConnexion) {
                     
                     const donneesJeton = {
                         id:utilisateur.id,
                         courriel: utilisateur.courriel,
+                        nom: utilisateur.nom,
                     };
                     const options = {
                         expiresIn:"1d",

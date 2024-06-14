@@ -28,8 +28,9 @@ export function Film(props) {
         if (typeof filmData.genres === 'string') {
           filmData.genres = JSON.parse(filmData.genres);
         }
+        setFilm({ ...filmData, commentaire: filmData.commentaire || [] });
+        
         const filmGenres = filmData.genres || [];
-        setFilm(filmData);
         fetch(urltoutFilms)
           .then((response) => response.json())
           .then((filmes) => {
@@ -44,7 +45,6 @@ export function Film(props) {
         console.error("Erreur de fetch :", error);
       });
   }, [urlFilm, id, urltoutFilms]);
-
 
   if (!film) {
     return <Loader />;
@@ -75,14 +75,14 @@ export function Film(props) {
     }
   };
   
-  
   const soumettreCommentaire = async (e) => {
     e.preventDefault();
     const aCommentaires = JSON.parse(localStorage.getItem(`commentaires_${id}`)) || [];
     aCommentaires.push({ 
       commentaire: e.target.commentaire.value, 
-      auteur: context.email, 
+      nom: context.nom,
       date: new Date().toISOString() 
+      
     });
   
     const oOptions = {
@@ -97,15 +97,13 @@ export function Film(props) {
       await fetch(urlFilm, oOptions);
       const response = await fetch(urlFilm);
       const data = await response.json();
-      setFilm((prevData) => ({ ...prevData, commentaire: data.commentaire }));
+      setFilm((prevData) => ({ ...prevData, commentaire: data.commentaire || [] }));
       localStorage.setItem(`commentaires_${id}`, JSON.stringify(aCommentaires));
     } catch (error) {
       console.error("Erreur lors de la mise à jour des commentaires :", error);
     }
   };
   
-  
-
   let blockAjoutCommentaire;
 
   if (context.isLogged) {
@@ -121,38 +119,38 @@ export function Film(props) {
     ? film.notes.reduce((sum, note) => sum + note, 0) / film.notes.length
     : 0;
 
-    return (
-      <div className="film">
-        <div className="film-header">
-          <Animations animationVariants="goucheVersDroit">
-            <img src={`/img/${film.titreVignette}`} alt={film.titre} className="film-image" />
-            <StarRating rating={moyenneNotes} onRate={soumettreNote} />
-          </Animations>
-          <Animations animationVariants="basVersHaut">
-            <div className="film-details">
-              <h1>{film.titre}</h1>
-              <h2>Réalisateur : {film.realisation}</h2>
-              <p>Année : {film.annee}</p>
-              <p>Description : {film.description}</p>
-              <p>
-                {film.genres.length > 1 ? 'Genres : ' : 'Genre : '}
-                {film.genres.map((genre, index) => (
-                  <span key={genre}>
-                    {genre}
-                    {index !== film.genres.length - 1 && ', '}
-                  </span>
-                ))}
-              </p>
-              {blockAjoutCommentaire}
-            </div>
-          </Animations>
-        </div>
-        <Commentaires commentaires={film.commentaire} />
+  return (
+    <div className="film">
+      <div className="film-header">
         <Animations animationVariants="goucheVersDroit">
-          <Carrossel films={filmsAvecGenresSimilaires} />
+          <img src={`/img/${film.titreVignette}`} alt={film.titre} className="film-image" />
+          <StarRating rating={moyenneNotes} onRate={soumettreNote} />
+        </Animations>
+        <Animations animationVariants="basVersHaut">
+          <div className="film-details">
+            <h1>{film.titre}</h1>
+            <h2>Réalisateur : {film.realisation}</h2>
+            <p>Année : {film.annee}</p>
+            <p>Description : {film.description}</p>
+            <p>
+              {film.genres.length > 1 ? 'Genres : ' : 'Genre : '}
+              {film.genres.map((genre, index) => (
+                <span key={genre}>
+                  {genre}
+                  {index !== film.genres.length - 1 && ', '}
+                </span>
+              ))}
+            </p>
+            {blockAjoutCommentaire}
+          </div>
         </Animations>
       </div>
-    );
+      <Commentaires commentaires={film.commentaire} />
+      <Animations animationVariants="goucheVersDroit">
+        <Carrossel films={filmsAvecGenresSimilaires} />
+      </Animations>
+    </div>
+  );
 }
 
 export default Film;
